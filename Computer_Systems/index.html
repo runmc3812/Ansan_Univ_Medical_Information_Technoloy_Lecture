@@ -5,18 +5,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>컴퓨터시스템 요약 · 카드형 단일 페이지</title>
   <meta name="description" content="강의자료 《6. 컴퓨터시스템》 기반 핵심 요약. GitHub Pages에 바로 배포 가능한 카드형 단일 페이지 템플릿." />
-  <link rel="stylesheet" href="style.css" />
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="stylesheet" href="./style.css" />
 </head>
 <body>
-  <header class="site-header">
+  <header class="site-header" role="banner">
     <div class="container">
+      <nav aria-label="Global" style="margin-bottom:10px">
+        <a href="../" style="margin-right:12px">← 홈</a>
+        <a href="../HIE/">HIE 요약으로 이동</a>
+      </nav>
       <h1>컴퓨터시스템 요약</h1>
       <p class="subtitle">하드웨어·소프트웨어·네트워크·디지털 기초 — 한눈에 보는 카드형 요약</p>
       <p class="meta">Last updated: 2025-10-01</p>
     </div>
   </header>
 
-  <main class="container">
+  <main class="container" role="main">
     <nav class="toc card" aria-label="Table of contents">
       <div class="toc-title">바로가기</div>
       <ol>
@@ -210,7 +215,7 @@
     </section>
   </main>
 
-  <footer class="site-footer">
+  <footer class="site-footer" role="contentinfo">
     <div class="container">
       <p>© 2025 컴퓨터시스템 요약 — 카드형 단일 페이지 템플릿</p>
     </div>
