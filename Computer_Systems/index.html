@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>컴퓨터시스템 요약 · 카드형 단일 페이지</title>
+  <meta name="description" content="강의자료 《6. 컴퓨터시스템》 기반 핵심 요약. GitHub Pages에 바로 배포 가능한 카드형 단일 페이지 템플릿." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1>컴퓨터시스템 요약</h1>
+      <p class="subtitle">하드웨어·소프트웨어·네트워크·디지털 기초 — 한눈에 보는 카드형 요약</p>
+      <p class="meta">Last updated: 2025-10-01</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <nav class="toc card" aria-label="Table of contents">
+      <div class="toc-title">바로가기</div>
+      <ol>
+        <li><a href="#overview">0) 개요</a></li>
+        <li><a href="#what">1) 컴퓨터란?</a></li>
+        <li><a href="#hardware">2) 하드웨어(HW)</a></li>
+        <li><a href="#software">3) 소프트웨어(SW)</a></li>
+        <li><a href="#network">4) 데이터 통신/네트워크</a></li>
+        <li><a href="#digital">5) 디지털 기초</a></li>
+        <li><a href="#checklist">6) 한 장 체크리스트</a></li>
+        <li><a href="#his">부록) 병원정보시스템</a></li>
+      </ol>
+    </nav>
+
+    <section id="overview" class="card">
+      <h2>0) 개요</h2>
+      <p><strong>컴퓨터시스템</strong>은 하드웨어 위에 소프트웨어가 올라가 이진수 데이터를 처리하는 전자장치입니다.
+         저장장치(RAM/ROM/보조기억장치)와 CPU, I/O가 유기적으로 동작합니다.</p>
+      <ul class="bullets">
+        <li>데이터 표현: <em>이진수(0/1)</em></li>
+        <li>실행 흐름: 보조기억장치 → <strong>RAM 적재</strong> → <strong>CPU 실행</strong> → 결과 저장</li>
+      </ul>
+    </section>
+
+    <section id="what" class="card">
+      <h2>1) 컴퓨터란? (What)</h2>
+      <p><strong>정의</strong> 하드웨어 위에 소프트웨어가 올라가 데이터를 <em>이진수</em>로 저장·처리하는 장치입니다.
+         기억장치에 저장된 내용을 CPU가 불러와 처리하고, 결과를 출력합니다.</p>
+    </section>
+
+    <section id="hardware" class="card">
+      <h2>2) 하드웨어(HW)</h2>
+      <div class="grid-2">
+        <div class="pill">
+          <h3>2-1. 구성요소</h3>
+          <ul class="bullets">
+            <li><strong>CPU</strong>(ALU·레지스터·제어장치·버스)</li>
+            <li><strong>기억장치</strong>(RAM/ROM/보조기억장치)</li>
+            <li><strong>I/O</strong>(입출력장치: 키보드·마우스·모니터 등)</li>
+          </ul>
+        </div>
+        <div class="pill">
+          <h3>2-2. CPU 핵심</h3>
+          <ul class="bullets">
+            <li><strong>ALU</strong>: 산술·논리 연산</li>
+            <li><strong>레지스터</strong>: 초고속 임시 저장</li>
+            <li><strong>제어장치</strong>: 명령 해석/제어 신호</li>
+            <li><strong>버스</strong>: 주소/데이터/제어 신호 전달</li>
+          </ul>
+        </div>
+      </div>
+      <div class="grid-2">
+        <div class="pill">
+          <h3>2-3. 기억장치/계층</h3>
+          <ul class="bullets">
+            <li><strong>RAM</strong>: 주기억·휘발성</li>
+            <li><strong>ROM/Flash</strong>: 비휘발</li>
+            <li><strong>보조기억</strong>: HDD/SSD 등</li>
+            <li><strong>계층</strong>: 레지스터/캐시 → RAM → SSD/HDD (속도↓ 용량↑)</li>
+          </ul>
+        </div>
+        <div class="pill">
+          <h3>2-4. 입출력장치</h3>
+          <ul class="bullets">
+            <li>입력: 키보드·마우스·스캐너·마이크</li>
+            <li>출력: 모니터·프린터·스피커</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="software" class="card">
+      <h2>3) 소프트웨어(SW)</h2>
+      <div class="grid-2">
+        <div class="pill">
+          <h3>3-1. 분류</h3>
+          <ul class="bullets">
+            <li><strong>시스템 SW</strong>: 운영체제, 드라이버, 컴파일러/링커</li>
+            <li><strong>응용 SW</strong>: 업무/의료 등 응용 프로그램</li>
+            <li>상용/프리/셰어, 패키지/프로토타입 등</li>
+          </ul>
+        </div>
+        <div class="pill">
+          <h3>3-2. 운영체제(OS)</h3>
+          <ul class="bullets">
+            <li><strong>역할</strong>: 자원관리(CPU/메모리/장치), 프로세스·파일 관리</li>
+            <li><strong>커널</strong>: 핵심 기능, <strong>쉘</strong>: 명령 해석기</li>
+            <li>예) Windows, macOS, Linux, Unix, iOS 등</li>
+          </ul>
+        </div>
+      </div>
+      <div class="grid-2">
+        <div class="pill">
+          <h3>3-3. 컴파일러·링커</h3>
+          <ul class="bullets">
+            <li><strong>컴파일러</strong>: 고급언어 → 목적코드</li>
+            <li><strong>링커</strong>: 목적파일+라이브러리 결합 → 실행파일</li>
+            <li>흐름: 번역(컴파일) → 조립(링크)</li>
+          </ul>
+        </div>
+        <div class="pill">
+          <h3>3-4. 의료 SW</h3>
+          <ul class="bullets">
+            <li>업무 SW 중 일부는 <strong>의료기기 SW</strong> 규제 대상</li>
+            <li>안전성/유효성, 품질관리 요구</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="network" class="card">
+      <h2>4) 데이터 통신/네트워크</h2>
+      <div class="grid-2">
+        <div class="pill">
+          <h3>4-1. 클라이언트/서버</h3>
+          <ul class="bullets">
+            <li><strong>클라이언트</strong>: 요청·표시</li>
+            <li><strong>서버</strong>: 저장·처리</li>
+            <li>클라우드/분산으로 경계 유연화</li>
+          </ul>
+        </div>
+        <div class="pill">
+          <h3>4-2. 프로토콜/OSI</h3>
+          <ul class="bullets">
+            <li><strong>프로토콜</strong>: HTTP, TLS, TCP/UDP, IP 등</li>
+            <li><strong>OSI 7계층</strong>: 응용–표현–세션–전송–네트워크–데이터링크–물리</li>
+          </ul>
+        </div>
+      </div>
+      <div class="grid-2">
+        <div class="pill">
+          <h3>4-3. 네트워크 기본</h3>
+          <ul class="bullets">
+            <li>전송방식: 단방향/반이중/전이중</li>
+            <li>거리: LAN/WAN · 토폴로지: 스타/버스/링/메시/트리</li>
+            <li>전송: 직렬/병렬 · 동기/비동기</li>
+          </ul>
+        </div>
+        <div class="pill">
+          <h3>4-4. 네트워크 장비</h3>
+          <ul class="bullets">
+            <li>NIC, 허브, <strong>스위치(L2)</strong>, <strong>라우터(L3)</strong></li>
+            <li>AP(무선), 모뎀</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="digital" class="card">
+      <h2>5) 디지털 기초</h2>
+      <div class="grid-3">
+        <div class="pill">
+          <h3>아날로그 vs 디지털</h3>
+          <p>연속값 vs 이산값(0/1). 디지털 회로는 LOW/HIGH로 처리.</p>
+        </div>
+        <div class="pill">
+          <h3>수 표현</h3>
+          <p>2진·16진, <strong>비트</strong>(최소 단위) · <strong>바이트</strong>(8비트)</p>
+        </div>
+        <div class="pill">
+          <h3>버스 폭·클럭</h3>
+          <p>버스 폭(표현·전달량), 클럭(동기화, Hz↑ → 간격↓)</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="checklist" class="card">
+      <h2>6) 한 장 체크리스트</h2>
+      <ul class="checklist">
+        <li><input type="checkbox"> CPU의 ALU/레지스터/제어장치/버스 설명</li>
+        <li><input type="checkbox"> RAM·ROM·Flash·보조기억 차이</li>
+        <li><input type="checkbox"> 커널·쉘·컴파일러·링커 역할</li>
+        <li><input type="checkbox"> OSI 7계층 순서</li>
+        <li><input type="checkbox"> 비트·바이트·버스 폭·클럭 의미</li>
+      </ul>
+    </section>
+
+    <section id="his" class="card">
+      <h2>부록) 병원정보시스템(예시)</h2>
+      <p>클라이언트–서버 구조 위에 <strong>OCS/EMR/PACS</strong> 등이 올라가며, 라우터/스위칭 허브로 네트워크를 구성합니다.</p>
+    </section>
+
+    <section class="card next">
+      <h2>배포 & 활용</h2>
+      <ol>
+        <li>GitHub에서 새 저장소를 만들고 이 파일과 <code>style.css</code>를 업로드</li>
+        <li><strong>Settings → Pages</strong>에서 <em>Deploy from a branch</em>, <code>main</code>, <code>/ (root)</code> 설정</li>
+        <li>배포 URL을 강의 슬라이드에 <strong>QR 코드</strong>로 삽입</li>
+      </ol>
+      <p class="muted">퀴즈 페이지(<code>/quiz/</code>)를 별도 추가해 연결하면 복습 루프가 완성됩니다.</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2025 컴퓨터시스템 요약 — 카드형 단일 페이지 템플릿</p>
+    </div>
+  </footer>
+</body>
+</html>
