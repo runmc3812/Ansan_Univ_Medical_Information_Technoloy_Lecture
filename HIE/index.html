@@ -5,15 +5,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>진료정보교류(HIE) 요약 · 강의 복습</title>
   <meta name="description" content="강의 자료 [진료정보교류]를 바탕으로 한 핵심 요약. 학생 복습용 GitHub Pages." />
-  <link rel="stylesheet" href="style.css" />
+  <meta name="robots" content="noindex, nofollow" />
+  <!-- 같은 폴더의 CSS를 사용합니다 -->
+  <link rel="stylesheet" href="./style.css" />
 </head>
 <body>
-  <header class="site-header">
-    <h1>진료정보교류(HIE) 요약</h1>
-    <p class="subtitle">강의 복습 · 한눈에 보는 핵심 정리</p>
+  <header class="site-header" role="banner">
+    <div class="container">
+      <nav aria-label="Global" style="margin-bottom:10px">
+        <a href="../" style="margin-right:12px">← 홈</a>
+        <a href="../Computer_Systems/">컴퓨터시스템 요약으로 이동</a>
+      </nav>
+      <h1>진료정보교류(HIE) 요약</h1>
+      <p class="subtitle">강의 복습 · 한눈에 보는 핵심 정리</p>
+    </div>
   </header>
 
-  <main class="container">
+  <main class="container" role="main">
     <nav class="toc card" aria-label="Table of Contents">
       <strong>바로가기</strong>
       <ol>
@@ -173,8 +181,10 @@
     </section>
   </main>
 
-  <footer class="site-footer">
-    <p>© 2025 강의 복습 자료 — 진료정보교류(HIE) 요약</p>
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <p>© 2025 강의 복습 자료 — 진료정보교류(HIE) 요약</p>
+    </div>
   </footer>
 </body>
 </html>
