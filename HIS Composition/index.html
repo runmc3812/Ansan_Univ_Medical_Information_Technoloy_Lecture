@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>병원정보시스템 구성 요약 · 카드형 단일 페이지</title>
+  <meta name="description" content="강의자료 《8. 병원정보시스템 구성》 기반 핵심 요약. OCS, EMR, PACS, LIS, ERP 등 병원정보시스템의 모든 구성 요소를 한 페이지로 정리." />
+  <meta name="robots" content="noindex, nofollow" />
+  
+  <style>
+    /* * 미니멀 카드형 CSS 템플릿 
+     * (별도 CSS 파일 없이 단일 HTML로 동작하도록 내장)
+     */
+    :root {
+      --color-bg: #f8f9fa;
+      --color-card-bg: #ffffff;
+      --color-pill-bg: #f9f9f9;
+      --color-border: #e9ecef;
+      --color-text: #212529;
+      --color-text-light: #6c757d;
+      --color-text-header: #343a40;
+      --color-link: #007bff;
+      --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --border-radius: 8px;
+      --box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    }
+    
+    body {
+      font-family: var(--font-family);
+      line-height: 1.6;
+      background-color: var(--color-bg);
+      color: var(--color-text);
+      margin: 0;
+      padding: 0;
+    }
+    
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 1.5rem 1rem;
+    }
+    
+    /* 헤더 및 푸터 */
+    .site-header, .site-footer {
+      text-align: center;
+      padding: 1.5rem 1rem;
+      color: var(--color-text-light);
+    }
+    .site-header h1 {
+      font-size: 2.5rem;
+      color: var(--color-text-header);
+      margin-bottom: 0.5rem;
+    }
+    .site-header .subtitle {
+      font-size: 1.15rem;
+      margin-top: 0;
+    }
+    .site-header .meta {
+      font-size: 0.9rem;
+      font-style: italic;
+    }
+    
+    /* 카드 스타일 */
+    .card {
+      background: var(--color-card-bg);
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+      border: 1px solid var(--color-border);
+      margin-bottom: 1.5rem;
+      padding: 1.5rem;
+      overflow: hidden;
+    }
+    
+    /* 목차(TOC) 카드 */
+    .toc .toc-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--color-text-header);
+      margin-bottom: 1rem;
+      border-bottom: 2px solid var(--color-link);
+      padding-bottom: 0.5rem;
+      display: inline-block;
+    }
+    .toc ol {
+      list-style-type: none;
+      padding-left: 0;
+      margin: 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 0.75rem;
+    }
+    .toc ol li a {
+      display: block;
+      padding: 0.75rem 1rem;
+      background: var(--color-pill-bg);
+      border-radius: 6px;
+      text-decoration: none;
+      color: var(--color-link);
+      font-weight: 500;
+      border: 1px solid var(--color-border);
+      transition: all 0.2s ease-in-out;
+    }
+    .toc ol li a:hover {
+      background: var(--color-card-bg);
+      border-color: var(--color-link);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 10px rgba(0, 123, 255, 0.1);
+    }
+    
+    /* 섹션 공통 */
+    section h2 {
+      font-size: 1.75rem;
+      color: var(--color-text-header);
+      margin-top: 0;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--color-border);
+    }
+    section p {
+      margin-top: 0;
+      margin-bottom: 1rem;
+    }
+    
+    /* 그리드 및 필(Pill) 스타일 */
+    .grid-2, .grid-3 {
+      display: grid;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+    .grid-2 {
+      grid-template-columns: 1fr 1fr;
+    }
+    .grid-3 {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+    .pill {
+      background: var(--color-pill-bg);
+      border: 1px solid var(--color-border);
+      border-radius: 6px;
+      padding: 1.25rem;
+    }
+    .pill h3 {
+      font-size: 1.15rem;
+      color: var(--color-text-header);
+      margin-top: 0;
+      margin-bottom: 0.75rem;
+    }
+    .pill p {
+      font-size: 0.95rem;
+      margin-bottom: 0;
+    }
+    
+    /* 목록 스타일 */
+    .bullets {
+      padding-left: 1.25rem;
+      margin: 0;
+    }
+    .bullets li {
+      margin-bottom: 0.5rem;
+      font-size: 0.95rem;
+    }
+    .bullets li::marker {
+      color: var(--color-link);
+    }
+
+    /* 링크 */
+    a {
+      color: var(--color-link);
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    
+    /* 반응형 */
+    @media (max-width: 768px) {
+      .grid-2, .grid-3 {
+        grid-template-columns: 1fr;
+      }
+      .site-header h1 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header" role="banner">
+    <div class="container">
+      <h1>병원정보시스템 구성 요약</h1>
+      <p class="subtitle">OCS·EMR·PACS·지원시스템·행정시스템 — 한눈에 보는 카드형 요약</p>
+      <p class="meta">Last updated: 2025-10-21</p>
+    </div>
+  </header>
+
+  <main class="container" role="main">
+
+    <nav class="toc card" aria-label="Table of contents">
+      <div class="toc-title">목차 (Contents)</div>
+      <ol>
+        <li><a href="#ocs">1) 처방전달시스템 (OCS)</a></li>
+        <li><a href="#emr">2) 전자의무기록 (EMR/EHR/PHR)</a></li>
+        <li><a href="#pacs">3) 의료영상저장전송시스템 (PACS)</a></li>
+        <li><a href="#support">4) 진료지원시스템</a></li>
+        <li><a href="#admin">5) 진료 목적 이외의 시스템</a></li>
+      </ol>
+    </nav>
+
+    <section id="ocs" class="card">
+      <h2>1) 처방전달시스템 (OCS)</h2>
+      [cite_start]<p><strong>OCS (Order Communication System)</strong>는 병원정보시스템(HIS)의 핵심 구성 요소로 [cite: 65][cite_start], 환자 진료와 관련된 모든 부서(진료과, 진료지원부서, 병동) 간의 **처방 전달 및 결과 조회를 연결**하는 시스템입니다[cite: 16].</p>
+      
+      <div class="grid-2">
+        <div class="pill">
+          <h3>주요 기능</h3>
+          <ul class="bullets">
+            [cite_start]<li><strong>처방 정보 전달:</strong> 의사 처방을 영상의학과, 검사실 등으로 실시간 전송[cite: 67].</li>
+            [cite_start]<li><strong>생산성 향상:</strong> 검사/치료 결과를 즉시 확인하여 신속한 의사결정 지원[cite: 68].</li>
+            [cite_start]<li><strong>정보 관리:</strong> 진료기록, 보험 정보, 진료비 청구 기능 포함[cite: 69].</li>
+            [cite_start]<li><strong>경영 지원:</strong> 진료비 수납, 수익 분석 등 병원 운영 효율화[cite: 70].</li>
+          </ul>
+        </div>
+        <div class="pill">
+          [cite_start]<h3>OCS vs. CPOE [cite: 20]</h3>
+          <ul class="bullets">
+            [cite_start]<li><strong>공통점:</strong> 의사가 입력한 처방을 진료 지원 부서로 정확히 전달[cite: 21].</li>
+            [cite_start]<li><strong>OCS:</strong> 처방 기능 외에 환자 접수, 수납, 보험 청구 등 **일반 행정업무까지 포함**[cite: 19, 21].</li>
+            <li><strong>CPOE:</strong> 의사가 직접 처방을 입력하는 시스템. [cite_start]해외에서는 CDSS(임상의사결정지원) 기능이 탑재된 것을 의미하기도 함[cite: 17].</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="emr" class="card">
+      <h2>2) 전자의무기록 (EMR/EHR/PHR)</h2>
+      [cite_start]<p><strong>EMR (Electronic Medical Record)</strong>은 기존의 종이 차트에 기록되던 모든 의료기록(병력, 진찰, 입/퇴원 기록 등)을 **디지털화(전자문서화)**하여 기록, 관리, 저장하는 시스템입니다[cite: 182, 357].</p>
+      
+      <div class="grid-3">
+        <div class="pill">
+          <h3>EMR (전자의무기록)</h3>
+          <p><strong>'병원 내'</strong>에서 의무기록의 공동 활용이 가능한 시스템입니다. [cite_start]즉, 특정 병원 내부용 디지털 차트입니다[cite: 371].</p>
+        </div>
+        <div class="pill">
+          <h3>EHR (전자건강기록)</h3>
+          [cite_start]<p>EMR을 기반으로 **'의료기관 간' 정보 교류(상호운용성)**가 가능한 시스템입니다[cite: 373, 434]. [cite_start]개인의 평생 건강기록에 해당합니다[cite: 361].</p>
+        </div>
+        <div class="pill">
+          <h3>PHR (개인건강기록)</h3>
+          [cite_start]<p>**'개인'이 자신의 건강관리 주체**가 되어 [cite: 509][cite_start], 병원 기록, 라이프로그(웨어러블) 등 모든 건강 정보를 직접 관리하고 접근을 통제하는 플랫폼입니다[cite: 510]. [cite_start](예: 마이 헬스웨이 [cite: 588])</p>
+        </div>
+      </div>
+      
+      <div class="grid-2">
+        <div class="pill">
+            [cite_start]<h3>EHR 시스템의 5대 구성 요소 [cite: 482, 494]</h3>
+            [cite_start]<p>EHR은 단순한 S/W가 아닌, 다음 5가지 요소가 결합된 통합 시스템입니다[cite: 483]:</p>
+            <ul class="bullets">
+                [cite_start]<li><strong>Hardware:</strong> 시스템 사용을 가능하게 하는 하드웨어 [cite: 488, 489]</li>
+                [cite_start]<li><strong>Software:</strong> 컴퓨터 장치를 작동하는 소프트웨어 [cite: 490, 491]</li>
+                [cite_start]<li><strong>People:</strong> 시스템을 지원하고 사용하는 사람들 (의료진, 환자 등) [cite: 492, 493]</li>
+                [cite_start]<li><strong>Policy:</strong> 시스템 채택을 촉진하는 정책 (표준, 규제 등) [cite: 496]</li>
+                [cite_start]<li><strong>Process:</strong> 결과 달성에 도움이 되는 프로세스 (운영 방식 등) [cite: 497]</li>
+            </ul>
+        </div>
+        <div class="pill">
+            [cite_start]<h3>EMR 발전 5단계 [cite: 378]</h3>
+            <ol style="padding-left: 1.25rem; font-size: 0.95rem;">
+                [cite_start]<li><strong>AMR:</strong> 사무자동화 (환자등록, 보험청구) [cite: 366]</li>
+                [cite_start]<li><strong>CMR:</strong> 의무기록 디지털화 (병원 내 전자보관) [cite: 367, 369]</li>
+                [cite_start]<li><strong>EMR:</strong> 병원 내 의무기록 공동활용 [cite: 371]</li>
+                [cite_start]<li><strong>EHR:</strong> 의료기관 간 정보공동활용 [cite: 373, 374]</li>
+                [cite_start]<li><strong>PHR:</strong> 모든 건강정보 포함 (개인 주체) [cite: 376, 377]</li>
+            </ol>
+        </div>
+      </div>
+    </section>
+
+    <section id="pacs" class="card">
+      <h2>3) 의료영상저장전송시스템 (PACS)</h2>
+      [cite_start]<p><strong>PACS (Picture Archiving and Communication System)</strong>는 '필름 없는 병원(Filmless Hospital)'을 구현하는 핵심 시스템입니다[cite: 654]. [cite_start]X-ray, CT, MRI 등 의료 영상 기기에서 획득한 디지털 이미지를 **고속 네트워크를 통해 전송, 저장, 검색, 판독**할 수 있도록 지원하는 디지털 영상 통합 관리 시스템입니다[cite: 655].</p>
+      
+      <div class="grid-2">
+        <div class="pill">
+          [cite_start]<h3>PACS의 4대 기능 [cite: 660]</h3>
+          <ul class="bullets">
+            [cite_start]<li><strong>영상 획득:</strong> DICOM 표준규격으로 이미지를 획득[cite: 661].</li>
+            [cite_start]<li><strong>영상 저장:</strong> 대용량 데이터베이스에 압축하여 저장[cite: 661].</li>
+            [cite_start]<li><strong>영상 조회:</strong> 데이터베이스에서 영상을 검색하여 추출[cite: 661].</li>
+            [cite_start]<li><strong>영상 전송:</strong> 고속 네트워크 대역폭으로 데이터를 전송[cite: 661].</li>
+          </ul>
+        </div>
+        <div class="pill">
+          <h3>핵심 표준: DICOM과 HL7</h3>
+          <ul class="bullets">
+            <li><strong>DICOM:</strong> 의료 **'이미지'**의 획득, 저장, 전송을 위한 국제 표준 규격입니다. [cite_start]PACS는 이 규격을 준수합니다[cite: 670].</li>
+            [cite_start]<li><strong>HL7:</strong> 환자 정보, 처방, 결과 등 **'텍스트' 기반의 의료 정보**를 서로 다른 시스템 간에 교환하기 위한 국제 표준 프로토콜입니다[cite: 672, 693].</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="support" class="card">
+      <h2>4) 진료지원시스템</h2>
+      [cite_start]<p>진료지원시스템은 진단검사의학과, 영상의학과, 약국 등 특수 부서의 고유 업무를 정보화하여 진료를 지원하는 시스템들입니다[cite: 700].</p>
+      
+      <div class="grid-2">
+        <div class="pill">
+          <h3>LIS (진단검사의학정보시스템)</h3>
+          [cite_start]<p>검사 의뢰부터 검체 접수, 검사 장비 인터페이스, 결과 보고에 이르기까지 검사실 업무를 신속, 정확하게 처리하는 시스템입니다[cite: 705, 717].</p>
+        </div>
+        <div class="pill">
+          <h3>RIS (영상의학정보시스템)</h3>
+          [cite_start]<p>영상의학과(X-ray, CT, MRI 등)의 검사 처방, 환자 접수, 판독 결과 입력 및 관리 등 행정적 업무와 워크플로우를 지원합니다[cite: 760].</p>
+        </div>
+        <div class="pill">
+          <h3>PIS (약국정보시스템)</h3>
+          [cite_start]<p>병원의 약제 관리, 환자의 처방약 조제, 재고 관리, 투약 정보 제공 등 약국 고유의 업무를 지원하는 시스템입니다[cite: 789, 848].</p>
+        </div>
+        <div class="pill">
+          <h3>CDSS (임상의사결정지원)</h3>
+          [cite_start]<p>의료진이 양질의 진료를 제공할 수 있도록 임상진료지침을 제공하고 진단 및 진료 과정을 지원하는 시스템입니다[cite: 1052]. [cite_start](예: 약물 상호작용 경고 [cite: 160])</p>
+        </div>
+        <div class="pill">
+          <h3>혈액은행 시스템</h3>
+          [cite_start]<p>혈액의 입고, 보관, 출고 및 검사(교차반응 등), 수혈 추적 관리 등 혈액은행 고유의 업무를 지원하여 의료사고를 예방합니다[cite: 828].</p>
+        </div>
+        <div class="pill">
+          <h3>Mobile POC (진료현장정보)</h3>
+          [cite_start]<p>의료진이 모바일 기기(스마트폰, 태블릿 등)를 이용해 진료 현장(Point of Care)에서 직접 의료 정보를 입력하거나 조회하는 시스템입니다[cite: 960].</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="admin" class="card">
+      <h2>5) 진료 목적 이외의 시스템</h2>
+      [cite_start]<p>병원의 효율적인 운영과 경영, 행정 업무를 지원하는 백오피스(Back-office) 시스템입니다[cite: 1066].</p>
+      
+      <div class="grid-2">
+        <div class="pill">
+          <h3>ERP (전사적자원관리)</h3>
+          [cite_start]<p>병원의 인사, 급여, 재무, 회계, 물류, 구매, 재고 등 모든 **경영 활동 프로세스를 통합 관리**하는 시스템입니다[cite: 1070].</p>
+        </div>
+        <div class="pill">
+          <h3>EIS (경영지원/평가분석)</h3>
+          [cite_start]<p>ERP, OCS 등에서 수집된 데이터를 분석하여 병원 경영진에게 외래/입원 환자 현황, 병원 수익 등 **핵심 경영 지표(KPI)를 시각화**하여 제공합니다[cite: 1100, 1109].</p>
+        </div>
+        <div class="pill">
+          <h3>R-ADT (환자등록시스템)</h3>
+          [cite_start]<p>환자의 **접수(외래/응급), 입원, 퇴원, 전원(전과)**을 관리하는 병원 원무 시스템의 기초입니다[cite: 1265, 1266]. [cite_start]모든 시스템에 환자 기본 정보를 제공합니다[cite: 1266].</p>
+        </div>
+        <div class="pill">
+          <h3>HIM (보건의료정보관리)</h3>
+          [cite_start]<p>보건의료정보관리사가 수행하는 전문 업무(의무기록 미비관리, 암 등록, 퇴원분석, 보험심사청구 등)를 지원하는 시스템입니다[cite: 1330, 1331].</p>
+        </div>
+        <div class="pill">
+          <h3>CDIS (임상장비 인터페이스)</h3>
+          [cite_start]<p>환자 감시 장치, 인공호흡기, 심전도(ECG) 등 다양한 의료 장비에서 발생하는 임상 데이터를 수집하여 EMR로 자동 전송하는 미들웨어 역할을 합니다[cite: 1118, 1120, 1151].</p>
+        </div>
+         <div class="pill">
+          <h3>QA (의료서비스 질 관리)</h3>
+          [cite_start]<p>EMR/EHR의 데이터를 데이터웨어하우스(DW)로 보내 통계(SPC), 데이터마이닝, OLAP 등을 활용해 의료 서비스의 질을 분석하고 의사결정을 지원합니다[cite: 1691, 1703].</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <p>© 2025 병원정보시스템 요약 — 카드형 단일 페이지 템플릿</p>
+    </div>
+  </footer>
+
+</body>
+</html>
