@@ -1,0 +1,46 @@
+/* Card-style single-page template (light theme, print-friendly) */
+:root{
+  --bg:#f7f8fc; --card:#ffffff; --text:#101322; --muted:#626a7a;
+  --border:#e5e8f0; --accent:#2b5cff; --accent-soft:#eaf0ff; --pill:#f3f7ff;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  font-family:system-ui,-apple-system,'Segoe UI',Roboto,Apple SD Gothic Neo,'Noto Sans KR','Malgun Gothic',sans-serif;
+  color:var(--text); background:var(--bg); line-height:1.65;
+}
+.container{max-width:980px;margin:0 auto;padding:16px}
+.site-header{background:radial-gradient(1000px 480px at 70% -10%,var(--accent-soft) 0%,transparent 60%)}
+.site-header .subtitle{color:var(--muted);margin:6px 0 0 0}
+.site-header .meta{color:var(--muted);font-size:.9rem;margin:.25rem 0 0 0}
+.card{
+  background:var(--card); border:1px solid var(--border); border-radius:16px;
+  padding:18px; margin:16px 0; box-shadow:0 6px 18px rgba(16,19,34,.06)
+}
+h1{margin:0 0 8px 0;font-size:2rem}
+h2{margin:4px 0 12px 0;font-size:1.25rem}
+h3{margin:6px 0 6px 0;font-size:1.06rem}
+a{text-decoration:none;color:var(--accent)}
+a:hover{text-decoration:underline}
+.bullets{margin:0 0 0 16px}
+.toc .toc-title{font-weight:700;margin-bottom:6px}
+.toc ol{margin:8px 0 0 18px}
+.grid-2{display:grid;grid-template-columns:1fr;gap:12px}
+.grid-3{display:grid;grid-template-columns:1fr;gap:12px}
+.pill{
+  border:1px solid var(--border); background:var(--pill); border-radius:12px; padding:12px
+}
+.checklist{list-style:none;padding:0}
+.checklist li{display:flex;gap:10px;align-items:center;margin:8px 0}
+.muted{color:var(--muted)}
+.site-footer{color:var(--muted);text-align:center;padding:28px 16px}
+.next ol{margin-left:18px}
+@media(min-width:720px){
+  .grid-2{grid-template-columns:1fr 1fr}
+  .grid-3{grid-template-columns:1fr 1fr 1fr}
+}
+@media print{
+  .site-header,.site-footer,.toc{display:none}
+  .container{max-width:100%}
+  .card{box-shadow:none;border-color:#ddd}
+}
