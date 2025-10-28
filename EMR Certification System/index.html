@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>EMR 인증제도 요약 · 카드형 단일 페이지</title>
+  <meta name="description" content="강의자료 《9. 전자의무기록 인증제도》 기반 핵심 요약. GitHub Pages에 바로 배포 가능한 카드형 단일 페이지 템플릿." />
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <header class="site-header" role="banner">
+    <div class="container">
+      <nav aria-label="Global" style="margin-bottom:10px">
+        <a href="../" style="margin-right:12px">← 홈</a>
+      </nav>
+      <h1>EMR 인증제도 요약</h1>
+      <p class="subtitle">환자 안전, 상호운용성, 보안성 — 한눈에 보는 카드형 요약</p>
+      <p class="meta">Last updated: 2025-10-01</p>
+    </div>
+  </header>
+
+  <main class="container" role="main">
+    <nav class="toc card" aria-label="Table of contents">
+      <div class="toc-title">바로가기</div>
+      <ol>
+        <li><a href="#overview">1. EMR 인증제 개요</a></li>
+        <li><a href="#target">2. 인증 대상 및 종류</a></li>
+        <li><a href="#procedure">3. 인증 절차</a></li>
+        <li><a href="#criteria">4. EMR 인증 기준 (3대 부문)</a></li>
+      </ol>
+    </nav>
+
+    <section id="overview" class="card">
+      <h2>1. EMR 인증제 개요</h2>
+      <ul class="bullets">
+        <li><strong>목적</strong>: 환자 안전과 진료 연속성 지원을 최우선 목적으로, 표준화/상호호환성/품질 향상을 도모합니다.</li>
+        <li><strong>법적 근거</strong>: 의료법 제23조의2 (필수가 아닌 <strong>자율적 참여</strong> 전제)</li>
+        <li><strong>기대 효과</strong>: 의료기관 간 격차 완화, 안전한 진료환경, 표준 기반 정보교류를 통한 의료의 질 향상</li>
+        <li><strong>주요 혜택</strong>: '의료 질 평가' 가산점 획득 (지원금 연계)</li>
+        <li><strong>유효 기간</strong>: 인증일로부터 <strong>3년</strong> (만기 시 갱신 필요)</li>
+      </ul>
+    </section>
+
+    <section id="target" class="card">
+      <h2>2. 인증 대상 및 종류</h2>
+      <div class="grid-2">
+        <div class="pill">
+          <h3>2-1. 인증 대상 (규모별)</h3>
+          <ul class="bullets">
+            <li><strong>유형 1</strong>: 병실이 없는 의원급 의료기관</li>
+            <li><strong>유형 2</strong>: 300병상 미만 의료기관</li>
+            <li><strong>유형 3</strong>: 300병상 이상 의료기관</li>
+          </ul>
+        </div>
+        <div class="pill">
+          <h3>2-2. 인증 종류</h3>
+          <ul class="bullets">
+            <li><strong>제품인증</strong>: EMR을 개발/판매하는 의료정보업체 또는 EMR을 자체 개발한 의료기관</li>
+            <li><strong>사용인증</strong>: EMR을 사용하는 의료기관 (제품인증 EMR을 쓰거나 자체 개발 EMR을 쓰는 경우)</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="procedure" class="card">
+      <h2>3. 인증 절차</h2>
+      <div class="grid-2">
+        <div class="pill">
+          <h3>3-1. 인증 절차 (흐름)</h3>
+          <p>(사전점검) → 인증신청 → 신청접수 → 인증심사 (문서/현장) → 심의·의결 → 인증공표</p>
+        </div>
+        <div class="pill">
+          <h3>3-2. 소요 기간</h3>
+          <p>신청부터 인증서 발급까지 약 <strong>3개월</strong> 정도 소요됩니다.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="criteria" class="card">
+      <h2>4. EMR 인증 기준 (3대 부문)</h2>
+      <p>인증기준은 <strong>'필수'</strong>와 '선택' 항목으로 나뉘며, 인증 통과를 위해 '필수' 항목은 모두 '적합' 판정을 받아야 합니다.</p>
+      <div class="grid-3">
+        <div class="pill">
+          <h3>4-1. 기능성</h3>
+          <p>진료 정보 생성/관리 성능</p>
+          <ul class="bullets">
+            <li><strong>환자정보</strong>: 유일성/영속성 (수정 불가)</li>
+            <li><strong>처방</strong>: 5대 필수 항목 (약물명, 용량, 경로, 횟수, 일수)</li>
+            <li><strong>기록수정</strong>: '수정 전(A)'/'후(B)' 추적 (EMR UI)</li>
+            <li><strong>전자서명</strong>: 최초/수정 기록에 적용, 서명자 확인</li>
+          </ul>
+        </div>
+        <div class="pill">
+          <h3>4-2. 상호운용성</h3>
+          <p>정보 교환/활용 성능 (궁극적 목표)</p>
+          <ul class="bullets">
+            <li><strong>표준</strong>: HL7 CDA 등 규격으로 통일</li>
+            <li><strong>구성</strong>: 환자 동의, MPI, DICOM 기반</li>
+            <li><strong>특징</strong>: 모든 유형 <strong>'선택'</strong> 기준</li>
+          </ul>
+        </div>
+        <div class="pill">
+          <h3>4-3. 보안성</h3>
+          <p>관리적/물리적/기술적 보안 성능</p>
+          <ul class="bullets">
+            <li><strong>특징</strong>: 모든 유형 <strong>'필수'</strong> 기준</li>
+            <li><strong>권한</strong>: 최소 권한, 로그인 실패 제한 (예: 5회)</li>
+            <li><strong>로그</strong>: 5대 항목 필수 (ID, 일시, IP, 정보주체, 수행업무) / 1년+ 보관</li>
+            <li><strong>암호화</strong>: 비밀번호(일방향), 주민번호(대칭키)</li>
+            <li><strong>클라우드</strong>: <strong>CSAP</strong> 인증 획득</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <p>© 2025 EMR 인증제도 요약 — 카드형 단일 페이지 템플릿</p>
+    </div>
+  </footer>
+</body>
+</html>
