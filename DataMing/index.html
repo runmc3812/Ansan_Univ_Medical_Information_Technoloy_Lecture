@@ -1,0 +1,355 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>데이터마이닝 핵심 요약 · 의료정보기술</title>
+    <meta name="description" content="의료정보기술 강의자료 기반 데이터마이닝 핵심 요약. 개념, 필요성, 주요 기법 및 의료 분야 활용 사례 정리." />
+    <meta name="robots" content="noindex, nofollow" />
+    <!-- Tailwind CSS CDN 로드 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* 커스텀 스타일 및 폰트 설정 */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Noto+Sans+KR:wght@100..900&display=swap');
+
+        :root {
+            --primary-color: #ef4444; /* Tailwind red-500 for data mining theme */
+        }
+
+        body {
+            font-family: 'Inter', 'Noto Sans KR', sans-serif;
+            background-color: #fef2f2; /* Light red background */
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1024px;
+            margin: 0 auto;
+            padding: 0 16px;
+        }
+
+        .site-header {
+            background-color: #ffffff;
+            border-bottom: 4px solid var(--primary-color);
+            padding: 2rem 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            margin-bottom: 2rem;
+        }
+
+        .site-header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            font-size: 1.125rem;
+            color: #6b7280;
+        }
+
+        .card {
+            background-color: #ffffff;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            border-left: 5px solid var(--primary-color);
+        }
+
+        .card h2 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #f3f4f6;
+        }
+
+        .pill {
+            background-color: #fef2f2;
+            border: 1px solid #fecaca;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.03);
+            height: 100%;
+        }
+
+        .pill h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #dc2626; /* Tailwind red-600 */
+            margin-bottom: 1rem;
+            border-bottom: 1px dashed #fca5a5;
+            padding-bottom: 0.5rem;
+        }
+
+        .bullets {
+            list-style: none;
+            padding-left: 0;
+            margin-top: 1rem;
+        }
+
+        .bullets li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .bullets li:before {
+            content: "•"; /* Dot bullet point */
+            color: var(--primary-color);
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            font-size: 1.2rem;
+            line-height: 1.2;
+        }
+
+        .table-custom {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        .table-custom th, .table-custom td {
+            border: 1px solid #fecaca;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .table-custom th {
+            background-color: #fddddd;
+            font-weight: 700;
+            color: #b91c1c;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+        @media (min-width: 768px) {
+            .grid-2 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        .grid-3 {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+        @media (min-width: 768px) {
+            .grid-3 {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .toc-title {
+            font-weight: 700;
+            font-size: 1.125rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #fecaca;
+            padding-bottom: 0.5rem;
+        }
+        .toc ol {list-style: none; padding: 0; margin: 0;}
+        .toc li {margin-bottom: 0.5rem;}
+        .toc a {color: #4b5563; text-decoration: none; transition: color 0.2s; display: block; padding: 0.25rem 0;}
+        .toc a:hover {color: var(--primary-color); text-decoration: underline;}
+    </style>
+</head>
+<body>
+    <!-- Site Header -->
+    <header class="site-header" role="banner">
+        <div class="container">
+            <h1>데이터마이닝 핵심 요약</h1>
+            <p class="subtitle">의료정보기술 강의 기반: 지식 발견을 위한 4대 핵심 기법</p>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="container" role="main">
+
+        <!-- Table of Contents Card -->
+        <nav class="toc card" aria-label="Table of contents" style="border-left: 1px solid var(--primary-color);">
+            <div class="toc-title">바로가기</div>
+            <ol>
+                <li><a href="#concept">1. 개념 및 필요성</a></li>
+                <li><a href="#function">2. 주요 기능 및 학습 방법</a></li>
+                <li><a href="#process">3. 수행 절차 및 핵심 기법</a></li>
+                <li><a href="#application">4. 보건의료 활용 사례</a></li>
+            </ol>
+        </nav>
+
+        <!-- 1. 개념 및 필요성 -->
+        <section id="concept" class="card">
+            <h2>1. 데이터마이닝의 개념 및 필요성</h2>
+            <div class="grid-2">
+                <div class="pill">
+                    <h3>정의 및 목적</h3>
+                    <ul class="bullets">
+                        <li>정의: 대량의 데이터 집합에서 유용한 정보, 패턴, 추세를 자동/반자동으로 발견하는 과정. (데이터 광산에서 금 캐기 비유)</li>
+                        <li>필요성: 보건의료 데이터 폭증, 증거 기반 의학(EBM) 및 예측의 중요성 증대.</li>
+                        <li>경쟁력: 기술과 자본이 비슷한 상황에서 정보력의 차이가 곧 경쟁력의 차이.</li>
+                    </ul>
+                </div>
+                <div class="pill">
+                    <h3>기술 진화 및 비교</h3>
+                    <p class="text-sm italic text-gray-500 mb-2">DB 기술은 수집에서 예측(지식발견)으로 진화했습니다.</p>
+                    <ul class="bullets">
+                        <li>데이터 진화: 데이터 수집 → DB 관리 → DW (통합/분석) → DM (예측/지식발견).</li>
+                        <li>주요 처리 방식: DB (OLTP) / DW (OLAP) / DM (데이터마이닝 기법 적용).</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3 class="mt-8 text-xl font-semibold text-gray-700">DB vs DW vs Data Mining 비교</h3>
+            <table class="table-custom">
+                <thead>
+                    <tr>
+                        <th>구분</th>
+                        <th>데이터베이스 (운영 DB)</th>
+                        <th>데이터웨어하우스 (DW)</th>
+                        <th>데이터마이닝 (DM)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>데이터 용도</td>
+                        <td>저장, 삭제, 수정, 검색</td>
+                        <td>데이터의 통합 및 정제 (읽기 전용)</td>
+                        <td>분류와 예측에 사용</td>
+                    </tr>
+                    <tr>
+                        <td>주요 업무</td>
+                        <td>일반적인 업무 처리 (e.g., 진료 접수)</td>
+                        <td>대용량 정보 분석 (e.g., 월간 통계)</td>
+                        <td>지식 발견 (e.g., 질병 예측)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- 2. 주요 기능 및 학습 방법 -->
+        <section id="function" class="card">
+            <h2>2. 주요 기능 및 학습 방법</h2>
+            <div class="grid-2">
+                <div class="pill">
+                    <h3>주요 기능 (5가지)</h3>
+                    <ul class="bullets">
+                        <li>분류: 데이터를 정해진 그룹으로 나눔 (e.g., 고위험군 / 저위험군).</li>
+                        <li>예측과 추정: 미래 값이나 확률을 예측 (e.g., 예상 재원일수, 질병 발병 확률).</li>
+                        <li>연관성 규칙: 항목 간의 동시 발생 패턴을 찾음 (e.g., 당뇨 환자가 고혈압을 동반할 확률).</li>
+                        <li>군집: 유사한 특성을 가진 데이터들을 그룹(Cluster)으로 묶음.</li>
+                        <li>데이터 축소: 핵심 요인만 식별하여 데이터 차원을 줄임.</li>
+                    </ul>
+                </div>
+                <div class="pill">
+                    <h3>학습 방법 (2가지)</h3>
+                    <ul class="bullets">
+                        <li>1. 지도 학습 (Supervised Learning):
+                            <p>정답(Label)이 있는 데이터로 학습, 출력변수 존재.</p>
+                            <p class="text-sm italic text-gray-600">→ 주요 기능: 분류, 예측 (e.g., 암 확진 여부 기반 예측).</p>
+                        </li>
+                        <li>2. 비지도 학습 (Unsupervised Learning):
+                            <p>정답 없이 스스로 데이터의 구조/패턴을 찾게 함, 출력변수 없음.</p>
+                            <p class="text-sm italic text-gray-600">→ 주요 기능: 군집, 연관성 규칙 (e.g., 내원 패턴 기반 환자 그룹화).</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. 수행 절차 및 핵심 기법 -->
+        <section id="process" class="card">
+            <h2>3. 데이터마이닝 수행 절차 및 핵심 기법</h2>
+            <div class="grid-2">
+                <div class="pill">
+                    <h3>수행 절차 (6단계 흐름)</h3>
+                    <p class="font-bold text-lg text-red-700">목적 확인 → 데이터 수집 → 전처리(70~80% 소요) → 변환/축소 → DM 수행 → 해석/평가/활용</p>
+                    <ul class="bullets text-sm mt-4">
+                        <li>전처리/변환: 결측치/이상치 처리, 분석에 적합한 형태로 데이터 가공.</li>
+                        <li>평가/활용: 모델 정확도 검증 (Accuracy, AUROC), 현업 적용(Deployment).</li>
+                    </ul>
+                </div>
+                <div class="pill">
+                    <h3>4대 핵심 기법 요약</h3>
+                    <table class="table-custom text-sm">
+                        <thead>
+                            <tr>
+                                <th>기법</th>
+                                <th>학습</th>
+                                <th>주요 특징</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>의사결정나무</td>
+                                <td>지도</td>
+                                <td>나무구조 분류/예측, 설명력 높음</td>
+                            </tr>
+                            <tr>
+                                <td>연관분석</td>
+                                <td>자율</td>
+                                <td>항목 간 동시발생 (IF→THEN), 지지도/신뢰도</td>
+                            </tr>
+                            <tr>
+                                <td>신경망 모형</td>
+                                <td>지도</td>
+                                <td>뉴런 모형화, 정확도 높음, Black Box</td>
+                            </tr>
+                            <tr>
+                                <td>군집분석</td>
+                                <td>자율</td>
+                                <td>유사 속성 그룹화 (계층적/비계층적)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. 보건의료 활용 사례 -->
+        <section id="application" class="card">
+            <h2>4. 보건의료 분야 활용 사례 (인공지능)</h2>
+            <div class="grid-3">
+                <div class="pill">
+                    <h3>병원 경영 / 행정</h3>
+                    <ul class="bullets">
+                        <li>병원 수익 영향 요인 분석</li>
+                        <li>미수금 발생 확률이 높은 환자 예측</li>
+                        <li>진료비 삭감 내역 분석 및 원인 규명</li>
+                        <li>환자 특성 분석 (군집분석, CRM)</li>
+                    </ul>
+                </div>
+                <div class="pill">
+                    <h3>임상 연구 / 진료 (AI)</h3>
+                    <ul class="bullets">
+                        <li>의료 영상 판독: X-ray, CT 등의 영상 분석 및 정상/비정상 분류</li>
+                        <li>치료법 도출: 환자 데이터 기반 진단 및 치료 권고 (e.g., IBM Watson Health)</li>
+                        <li>질병 관계 예측: 질병 간의 연관성 및 발병 확률 예측</li>
+                    </ul>
+                </div>
+                <div class="pill">
+                    <h3>질병 발병 및 중증도 예측</h3>
+                    <ul class="bullets">
+                        <li>암 재발 환자 예측 (신경망)</li>
+                        <li>환자 생체신호를 분석하여 심정지 예측</li>
+                        <li>개인 건강검진 기록 기반 주요 질환 위험도 예측 (e.g., 당뇨, 치매, 암)</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Site Footer -->
+    <footer class="site-footer" role="contentinfo">
+        <div class="container text-gray-500 border-t border-red-200 mt-8">
+            <p>© 2025 데이터마이닝 핵심 요약 — 의료정보기술 자료 기반</p>
+        </div>
+    </footer>
+</body>
+</html>
