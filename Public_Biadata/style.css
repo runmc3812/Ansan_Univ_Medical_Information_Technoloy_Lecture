@@ -1,0 +1,139 @@
+/* Recommended CSS for Card Layout 
+   Theme: Medical Blue & Clean White
+*/
+:root {
+  --primary-color: #006c84;    /* 짙은 청록색 (신뢰감) */
+  --secondary-color: #6eb5c0;  /* 밝은 청록색 (포인트) */
+  --accent-color: #e2f0f3;     /* 아주 연한 배경색 (Pill 배경) */
+  --text-color: #333333;
+  --bg-color: #f4f7f6;
+  --card-bg: #ffffff;
+  --shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  --radius: 12px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  line-height: 1.6;
+  word-break: keep-all;
+}
+
+a { text-decoration: none; color: inherit; transition: 0.2s; }
+a:hover { color: var(--primary-color); }
+
+/* Header */
+.site-header {
+  background: var(--primary-color);
+  color: white;
+  padding: 40px 20px;
+  text-align: center;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+.site-header h1 { font-size: 2rem; margin-bottom: 10px; font-weight: 700; }
+.site-header .subtitle { font-size: 1rem; opacity: 0.9; font-weight: 300; }
+.site-header .meta { font-size: 0.8rem; margin-top: 15px; opacity: 0.7; }
+.nav-link { 
+  display: inline-block; 
+  margin-bottom: 15px; 
+  padding: 5px 10px; 
+  border: 1px solid rgba(255,255,255,0.3); 
+  border-radius: 4px; 
+  font-size: 0.9rem;
+}
+.nav-link:hover { background: rgba(255,255,255,0.1); border-color: white; color: white;}
+
+/* Layout */
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Cards */
+.card {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 30px;
+  margin-bottom: 30px;
+  border-top: 4px solid var(--secondary-color);
+}
+
+.card h2 {
+  font-size: 1.5rem;
+  color: var(--primary-color);
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #eee;
+}
+
+/* Table of Contents */
+.toc { background: white; border-top: 4px solid var(--primary-color); }
+.toc-title { font-weight: 700; font-size: 1.1rem; margin-bottom: 10px; color: var(--primary-color); }
+.toc ol { padding-left: 20px; color: var(--primary-color); font-weight: 500; }
+.toc li { margin-bottom: 5px; }
+
+/* Grids & Pills */
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+.grid-3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
+}
+
+.pill {
+  background-color: var(--accent-color);
+  padding: 20px;
+  border-radius: 8px;
+}
+.pill h3 {
+  font-size: 1.1rem;
+  margin-bottom: 12px;
+  color: #004d61;
+  font-weight: 700;
+}
+
+/* Lists */
+.bullets { list-style-type: none; padding: 0; }
+.bullets li {
+  position: relative;
+  padding-left: 18px;
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+}
+.bullets li::before {
+  content: "•";
+  color: var(--primary-color);
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-weight: bold;
+}
+strong { color: #d6336c; /* 강조색 (핑크 계열) */ }
+em { font-style: normal; background: #fff3cd; padding: 0 4px; border-radius: 2px; }
+
+/* Footer */
+.site-footer {
+  text-align: center;
+  padding: 40px 0;
+  color: #777;
+  font-size: 0.9rem;
+  margin-top: 50px;
+  border-top: 1px solid #ddd;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .grid-2, .grid-3 { grid-template-columns: 1fr; }
+  .site-header { padding: 30px 15px; }
+  .card { padding: 20px; }
+}
