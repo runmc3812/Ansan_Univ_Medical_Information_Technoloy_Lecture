@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>5주차 · PACS, 하위 정보시스템, 개인건강기록 | 보건의료정보학</title>
+<meta name="description" content="보건의료정보학 CHAPTER 3 · 5주차 핵심 정리 — PACS, LIS·RIS·PIS·NIS·HMIS, PHR과 마이헬스웨이, 실제 사례와 퀴즈">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500&family=IBM+Plex+Sans+KR:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a class="skip" href="#main">본문으로 건너뛰기</a>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="course">보건의료정보학 · CHAPTER 3 · 5주차</p>
+    <h1>필름 창고가 사라진 자리에<br>무엇이 들어섰나</h1>
+    <p class="lede">흉통으로 병원에 온 한 환자를 따라갑니다. 지난주에는 접수와 처방까지 봤고, 이번 주에는 그 처방이 영상이 되고, 검사와 투약이 되고, 마지막에는 환자 손 안의 기록이 되는 과정을 봅니다.</p>
+
+    <nav class="pathway" aria-label="환자의 이동 경로와 이번 주 학습 범위">
+      <ol>
+        <li class="past"><span class="stop">접수 · 등록</span><span class="sys">원무 시스템</span></li>
+        <li class="past"><span class="stop">처방 입력</span><span class="sys">OCS</span></li>
+        <li class="now"><a href="#pacs"><span class="stop">검사 · 영상</span><span class="sys">PACS</span><span class="when">1차시</span></a></li>
+        <li class="now"><a href="#sub"><span class="stop">검사 · 투약 · 간호</span><span class="sys">LIS · RIS · PIS · NIS · HMIS</span><span class="when">2차시</span></a></li>
+        <li class="now"><a href="#phr"><span class="stop">퇴원 이후</span><span class="sys">PHR · 마이헬스웨이</span><span class="when">3차시</span></a></li>
+      </ol>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ================= 1차시 ================= -->
+<section id="pacs" class="period">
+  <div class="wrap">
+    <header class="period-head">
+      <p class="period-no">1차시</p>
+      <h2>PACS — 의료영상저장전송시스템</h2>
+      <p class="question">중형병원이 하루에 만드는 영상 500GB는 어디로 가는가?</p>
+    </header>
+
+    <div class="core">
+      <p class="def"><strong>PACS</strong>(Picture Archiving and Communication System)는 CT · MRI · X-ray · 초음파 영상을 DICOM 표준으로 저장하고, 네트워크로 전송 · 조회 · 관리하는 정보시스템입니다. 단순한 저장소가 아니라 HIS · EMR · RIS와 연결된 통합 영상정보 플랫폼입니다.</p>
+
+      <h3>왜 필름을 버렸나</h3>
+      <p>필름은 대규모 창고가 필요했고, 열 · 습기 · 빛에 손상됐고, 찾는 데 오래 걸렸고, 다른 병원과 나누기 어려웠고, 현상약과 인화장비에 돈이 계속 들었습니다. 1980년대 디지털 장비가 보급됐지만 제조사마다 형식이 달라 서로 읽지 못했습니다. <strong>1993년 ACR과 NEMA가 DICOM을 제정</strong>하면서 비로소 서로 다른 장비가 같은 언어로 영상을 주고받게 됐습니다.</p>
+
+      <h3>세 부분으로 이루어진 시스템</h3>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th scope="col">부분</th><th scope="col">무엇이</th><th scope="col">하는 일</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">영상획득</th><td>CT · MRI · PET · 초음파 · CR · DR · 내시경</td><td>신체를 디지털 영상으로 바꾸고 DICOM으로 서버에 자동 업로드</td></tr>
+            <tr><th scope="row">저장 · 전송</th><td>Image · Database · Communication 서버</td><td>RAID로 안전하게 저장, 메타데이터를 SQL로 관리, 기가비트망으로 전송</td></tr>
+            <tr><th scope="row">조회 · 판독</th><td>판독 워크스테이션</td><td>3~5MP 고해상도 모니터와 GPU로 확대 · 비교 · 3D 재구성</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <figure class="dicom">
+      <figcaption>
+        <h3>DICOM 파일 속을 열어 보면</h3>
+        <p>파일 하나는 태그가 붙은 수천 개의 칸(헤더)과 영상 픽셀로 이루어집니다. 영상 안에 환자 이름과 ID가 함께 들어 있다는 점을 기억해 두세요.</p>
+      </figcaption>
+      <dl class="tags">
+        <div><dt>(0010,0010)</dt><dd>Patient's Name — 환자 이름</dd></div>
+        <div><dt>(0010,0020)</dt><dd>Patient ID — HIS의 환자 등록번호</dd></div>
+        <div><dt>(0008,0060)</dt><dd>Modality — 검사 장비 종류</dd></div>
+        <div><dt>(0020,000D)</dt><dd>Study Instance UID — 검사 고유 식별자</dd></div>
+        <div><dt>(0028,0010)</dt><dd>Rows — 영상의 행 수 (CT는 보통 512)</dd></div>
+        <div><dt>(7FE0,0010)</dt><dd>Pixel Data — 영상 본체</dd></div>
+      </dl>
+      <p class="calc">512 × 512 × 2바이트 ≈ 0.5MB 한 장 → 512MB 흉부 CT는 약 1,000장의 묶음</p>
+    </figure>
+
+    <div class="core">
+      <h3>한국은 어떻게 PACS 강국이 되었나</h3>
+      <ol class="timeline">
+        <li><span class="year">1994</span>대한PACS학회 설립</li>
+        <li><span class="year">1995</span>삼성서울병원, 국내 최초 Full PACS 가동</li>
+        <li><span class="year">1999.11</span>Full PACS 영상에 건강보험 수가 적용 — 세계적으로 드문 제도</li>
+        <li><span class="year">2005 무렵</span>병원급 의료기관 도입률 약 70%</li>
+      </ol>
+      <p class="takeaway">기술보다 수가가 먼저 병원을 움직였습니다. 제도 설계가 정보시스템 확산 속도를 결정한 대표 사례입니다.</p>
+
+      <h3>차세대 PACS — 저장에서 분석으로</h3>
+      <div class="table-scroll">
+        <table class="versus">
+          <thead><tr><th scope="col"></th><th scope="col">기존 PACS</th><th scope="col">차세대 PACS</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">정체성</th><td>영상 저장 · 전송 시스템</td><td>의료데이터 통합 플랫폼</td></tr>
+            <tr><th scope="row">데이터</th><td>영상 단일</td><td>영상 · 생체신호 · 문서 · 음성 · 텍스트</td></tr>
+            <tr><th scope="row">핵심 기능</th><td>저장 · 전송</td><td>AI 분석과 예측</td></tr>
+            <tr><th scope="row">인프라</th><td>병원 내부 서버</td><td>클라우드 분산 저장 (Web · Mobile · Cloud PACS)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="cases">
+      <h3>실제 사례</h3>
+      <details>
+        <summary><span class="case-title">판독실의 고릴라</span><span class="case-hook">전문의 83%가 폐 CT 속 고릴라를 못 봤다</span></summary>
+        <div class="case-body">
+          <p>2013년 Drew 연구팀은 폐결절을 찾는 영상의학 전문의 24명에게, 평균 결절보다 48배 큰 고릴라 그림을 넣은 CT를 보여줬습니다. 83%가 알아채지 못했고, 시선추적 결과 상당수는 그 위치를 직접 보고도 인지하지 못했습니다. 찾는 것에 집중할수록 다른 것이 보이지 않는 부주의맹(Inattentional Blindness)입니다.</p>
+          <p class="lesson">사람의 주의력에는 한계가 있습니다. 워크스테이션의 비교 기능과 AI 판독보조가 필요한 인간적인 이유입니다.</p>
+        </div>
+      </details>
+      <details>
+        <summary><span class="case-title">인터넷에 열려 있던 PACS</span><span class="case-hook">로그인 없이 열리는 서버 590대</span></summary>
+        <div class="case-body">
+          <p>2019년 독일 보안기업 Greenbone이 약 2,300개 PACS를 점검한 결과, 590개가 인증 없이 접속됐습니다. 52개국 환자 기록 약 2,430만 건, 영상 약 7억 3,700만 장이 노출돼 있었고, 두 달 뒤 재조사에서는 노출 영상이 약 11억 9천만 장으로 오히려 늘었습니다.</p>
+          <p class="lesson">DICOM 헤더에 이름과 ID가 들어 있으니 영상 유출은 곧 개인정보 유출입니다. 표준은 교환을 약속할 뿐, 보안까지 보장하지 않습니다.</p>
+        </div>
+      </details>
+      <details>
+        <summary><span class="case-title">AI 판독 결과가 EMR에 들어갈 때</span><span class="case-hook">책임은 누구에게 있는가</span></summary>
+        <div class="case-body">
+          <p>차세대 PACS에서 AI는 병변 후보를 표시하고 악성 가능성 점수를 매기며, 그 결과가 EMR에 자동 저장됩니다. 의사가 AI 표시를 무시했다가 놓친다면, AI가 틀린 결과가 진료기록이 된다면 어떻게 될까요.</p>
+          <p class="lesson">현재 영상 AI는 대부분 의사를 돕는 보조 목적으로 허가되어 최종 판단과 책임은 의사에게 있습니다. 이 전제가 흔들리면 제도도 함께 바뀌어야 합니다.</p>
+        </div>
+      </details>
+    </div>
+
+    <div class="quiz" data-quiz="single">
+      <p class="quiz-label">즉답 퀴즈</p>
+      <p class="quiz-q">1995년부터 2025년 말까지 미국 FDA가 허가한 AI 의료기기 중 영상의학 분야의 비율은?</p>
+      <div class="choices" role="group" aria-label="보기">
+        <button type="button" data-correct="false">약 25%</button>
+        <button type="button" data-correct="false">약 50%</button>
+        <button type="button" data-correct="true">약 76%</button>
+      </div>
+      <p class="feedback" aria-live="polite" hidden>정답은 약 76%입니다. 누적 1,451건 중 1,104건이 영상의학 분야입니다. 표준 형식(DICOM), 30년간 쌓인 데이터(PACS), 정답 역할을 하는 판독문 — 잘 정리된 데이터가 있는 곳에 AI가 먼저 도착했습니다.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 2차시 ================= -->
+<section id="sub" class="period">
+  <div class="wrap">
+    <header class="period-head">
+      <p class="period-no">2차시</p>
+      <h2>진료를 떠받치는 다섯 개의 시스템</h2>
+      <p class="question">의사의 처방 하나가 다섯 부서에서 어떻게 다르게 처리될까?</p>
+    </header>
+
+    <div class="core">
+      <p class="def">다섯 시스템 모두 OCS로 처방을 받고, 결과를 EMR로 돌려보냅니다. 이것이 병원 데이터 흐름의 기본 구조입니다.</p>
+      <div class="table-scroll">
+        <table class="systems">
+          <thead><tr><th scope="col">시스템</th><th scope="col">현장</th><th scope="col">꼭 기억할 것</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">LIS<span>진단검사의학정보시스템</span></th><td>검사실</td><td>의료 의사결정의 약 70%가 검사에 근거. 내부정도관리(QC)는 표준시료로 우리 장비를, 외부정도관리(EQA)는 외부 시료로 우리 실력을 검증</td></tr>
+            <tr><th scope="row">RIS<span>영상의학정보시스템</span></th><td>영상의학과</td><td>예약 · 판독 일정 · 보고서 · 피폭선량 등 업무흐름 관리. 영상 자체는 PACS가 담당</td></tr>
+            <tr><th scope="row">PIS<span>약제정보시스템</span></th><td>약제부</td><td>처방 검토 · 바코드 조제 검증 · DUR 연계. DUR은 2008년 도입, 2010년 12월 전국 시행</td></tr>
+            <tr><th scope="row">NIS<span>간호정보시스템</span></th><td>병동</td><td>병원 임상데이터 중 가장 방대한 임상정보 허브. 간호과정 5단계(평가 → 진단 → 계획 → 수행 → 평가) 지원</td></tr>
+            <tr><th scope="row">HMIS<span>병원경영정보시스템</span></th><td>경영기획실</td><td>공익성과 수익성의 균형. 단위원가 · 손익분기점 · KPI 대시보드 · AI 수요 예측</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="quiz" data-quiz="sort">
+      <p class="quiz-label">즉답 퀴즈</p>
+      <p class="quiz-q">이 기능은 RIS일까, PACS일까? 기준은 하나 — 업무의 흐름을 다루는가, 영상 자체를 다루는가.</p>
+      <ul class="sort-list">
+        <li data-answer="RIS"><span class="item">CT 촬영 예약과 검사실 · 장비 배정</span><span class="pick"><button type="button">RIS</button><button type="button">PACS</button></span></li>
+        <li data-answer="PACS"><span class="item">CT 영상을 3D로 재구성하여 조회</span><span class="pick"><button type="button">RIS</button><button type="button">PACS</button></span></li>
+        <li data-answer="RIS"><span class="item">환자별 누적 방사선 피폭선량 추적</span><span class="pick"><button type="button">RIS</button><button type="button">PACS</button></span></li>
+        <li data-answer="PACS"><span class="item">작년 영상과 나란히 놓고 비교 판독</span><span class="pick"><button type="button">RIS</button><button type="button">PACS</button></span></li>
+        <li data-answer="RIS"><span class="item">판독보고서 승인 · 서명 후 EMR로 전송</span><span class="pick"><button type="button">RIS</button><button type="button">PACS</button></span></li>
+        <li data-answer="PACS"><span class="item">영상 파일을 RAID · 클라우드에 장기 보관</span><span class="pick"><button type="button">RIS</button><button type="button">PACS</button></span></li>
+      </ul>
+      <p class="score" aria-live="polite"></p>
+    </div>
+
+    <div class="cases">
+      <h3>실제 사례</h3>
+      <details>
+        <summary><span class="case-title">Theranos</span><span class="case-hook">피 한 방울의 거짓말</span></summary>
+        <div class="case-body">
+          <p>손가락 피 몇 방울로 수백 가지 검사를 한다던 기업은 한때 기업가치 약 90억 달러로 평가됐습니다. 실제로는 자체 장비의 정확도에 문제가 있었고, 상당수 검사는 타사 상용 장비로 몰래 수행됐으며, 품질관리 결과를 숨긴 채 검사를 계속했습니다. 2015년 탐사보도 이후 2018년 회사가 해산됐고, 창업자는 2022년 사기 혐의로 징역 11년 3개월을 선고받았습니다.</p>
+          <p class="lesson">QC와 EQA는 서류 작업이 아니라 잘못된 검사결과로부터 환자를 지키는 마지막 방어선입니다.</p>
+        </div>
+      </details>
+      <details>
+        <summary><span class="case-title">종현이 사건과 환자안전법</span><span class="case-hook">투약 오류 하나가 법을 만들다</span></summary>
+        <div class="case-body">
+          <p>2010년 5월, 백혈병 치료 중이던 9세 정종현 군이 정맥으로만 투여해야 하는 항암제 빈크리스틴을 척수강 내로 잘못 투여받아 사망했습니다. 유가족과 환자단체의 요구로 환자안전법이 2015년 1월 제정되어 2016년 7월 시행됐고, 환자안전사고 자율보고 체계와 전담인력, 주의경보가 도입됐습니다.</p>
+          <p class="lesson">PIS · DUR · 바코드 검증이 지키려는 원칙 — 맞는 약을, 맞는 환자에게, 맞는 용량과 맞는 경로로.</p>
+        </div>
+      </details>
+      <details>
+        <summary><span class="case-title">통하는 안전기술 vs 무시당하는 안전기술</span><span class="case-hook">바코드 투약과 경고 팝업</span></summary>
+        <div class="case-body">
+          <p>미국 Brigham 병원의 바코드 투약(BCMA) 연구(NEJM, 2010)에서는 시간 관련을 제외한 투약 오류가 약 41%, 잠재적 약물이상반응이 약 51% 줄었습니다. 반면 약물 경고 팝업은 49~96%가 무시된다는 체계적 고찰(2006)이 있습니다. 너무 잦은 경고가 경고 피로(Alert Fatigue)를 만들고, 중요한 경고까지 묻힙니다.</p>
+          <p class="lesson">업무 흐름에 녹아든 기술은 효과를 내고, 흐름을 끊는 기술은 무시됩니다.</p>
+        </div>
+      </details>
+      <details>
+        <summary><span class="case-title">Epic 패혈증 예측 모델</span><span class="case-hook">AI 경보는 믿을 만한가</span></summary>
+        <div class="case-body">
+          <div class="figures">
+            <p><span class="num">0.63</span>외부 검증 AUC<br>(개발사 제시 0.76~0.83)</p>
+            <p><span class="num">67%</span>모델이 놓친<br>패혈증 환자</p>
+            <p><span class="num">18%</span>경보가 울린<br>입원 환자</p>
+          </div>
+          <p>미국 수백 개 병원이 쓰던 상용 모델을 미시간대병원 약 3만 8천여 건의 입원 데이터로 외부 검증한 결과입니다(Wong 외, JAMA Internal Medicine, 2021). 놓친 환자는 많았고 경보는 잦았습니다.</p>
+          <p class="lesson">NIS의 알람에 AI를 얹을 때 필요한 두 가지 — 우리 병원 데이터로 하는 외부 검증, 그리고 경보 피로 관리.</p>
+        </div>
+      </details>
+      <details>
+        <summary><span class="case-title">Change Healthcare 사태</span><span class="case-hook">청구 시스템 하나가 멈추자</span></summary>
+        <div class="case-body">
+          <p>2024년 2월, 미국 의료 청구 · 결제 중계사가 다요소인증(MFA)이 없던 원격접속 포털을 통해 랜섬웨어에 감염됐습니다. 보험 자격 확인, 사전승인, 약국 결제가 수 주간 마비됐고, 몸값 2,200만 달러가 지불됐습니다. 최종 집계된 개인정보 유출은 약 1억 9,270만 명으로 미국 의료 데이터 유출 사상 최대 규모입니다.</p>
+          <p class="lesson">HMIS는 행정 시스템이지만, 멈추는 순간 진료도 멈춥니다. 경영정보 역시 환자안전을 떠받치는 인프라입니다.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 3차시 ================= -->
+<section id="phr" class="period">
+  <div class="wrap">
+    <header class="period-head">
+      <p class="period-no">3차시</p>
+      <h2>내 건강기록의 주인은 누구인가</h2>
+      <p class="question">퇴원한 환자는 자기 진료기록을 볼 수 있을까?</p>
+    </header>
+
+    <div class="core">
+      <p class="def"><strong>PHR</strong>(Personal Health Record)은 개인이 스스로 자신의 건강 · 의료 데이터를 수집 · 저장 · 관리 · 공유하는 정보시스템입니다. 지금까지의 모든 시스템은 의료기관이 주체였지만, PHR에서 처음으로 주체가 개인으로 바뀝니다.</p>
+
+      <h3>EMR과 PHR — 기술이 아니라 주체가 다르다</h3>
+      <div class="table-scroll">
+        <table class="versus">
+          <thead><tr><th scope="col"></th><th scope="col">EMR</th><th scope="col">PHR</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">관리 주체</th><td>의료기관</td><td>개인</td></tr>
+            <tr><th scope="row">목적</th><td>진료와 법적 기록</td><td>자기주도적 건강관리</td></tr>
+            <tr><th scope="row">데이터 범위</th><td>진단 · 검사 · 처방 중심</td><td>생활습관 · 운동 · 식이 · 유전자까지</td></tr>
+            <tr><th scope="row">접근권한</th><td>의료진 · 보험자 등 제한적</td><td>개인이 공개 · 비공개 선택</td></tr>
+            <tr><th scope="row">법적 효력</th><td>공식 진료기록</td><td>법적 문서가 아님</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>데이터를 어디에 두는가 — 네 가지 구축 모델</h3>
+      <dl class="models">
+        <div><dt>중앙집중형</dt><dd>한 서버에 모두 저장. 관리는 쉽지만 대량 유출 위험</dd></div>
+        <div><dt>허브-스포크형</dt><dd>허브는 인덱스만, 데이터는 각 기관에. 균형은 좋지만 초기 비용이 높음</dd></div>
+        <div><dt>연합형</dt><dd>데이터를 옮기지 않고 표준(FHIR)으로 접근(data access). 개인정보 규제가 엄격한 나라의 현실적 대안</dd></div>
+        <div><dt>탈중앙형</dt><dd>블록체인 분산원장에 접근 이력 기록. 실제 운영 사례는 아직 적음</dd></div>
+      </dl>
+    </div>
+
+    <div class="highway">
+      <h3>숫자로 보는 건강정보 고속도로</h3>
+      <p>마이헬스웨이의 실제 이름입니다. 데이터를 한곳에 모아 두는 저장소가 아니라, 각 기관에 둔 채 본인 동의 시 원하는 곳으로 보내는 <strong>중계 플랫폼</strong>이며, 시민은 ‘나의건강기록’ 앱으로 조회 · 저장 · 전송합니다.</p>
+      <ul class="figures">
+        <li><span class="num">245 → 860</span>참여 의료기관<br>시범운영(2022) → 본가동(2023.9)</li>
+        <li><span class="num">12종 113항목</span>의료기관이 제공하는<br>진료 데이터 (FHIR)</li>
+        <li><span class="num">47개</span>2025년부터 연계되는<br>상급종합병원 전체</li>
+      </ul>
+    </div>
+
+    <div class="quiz" data-quiz="sort">
+      <p class="quiz-label">즉답 퀴즈</p>
+      <p class="quiz-q">EMR일까, PHR일까? 기준은 하나 — 이 기록의 주인은 기관인가, 개인인가.</p>
+      <ul class="sort-list">
+        <li data-answer="EMR"><span class="item">법적 효력을 갖는 공식 진료기록</span><span class="pick"><button type="button">EMR</button><button type="button">PHR</button></span></li>
+        <li data-answer="PHR"><span class="item">스마트워치가 심박수를 자동으로 기록</span><span class="pick"><button type="button">EMR</button><button type="button">PHR</button></span></li>
+        <li data-answer="PHR"><span class="item">공개 · 비공개 여부를 내가 선택</span><span class="pick"><button type="button">EMR</button><button type="button">PHR</button></span></li>
+        <li data-answer="EMR"><span class="item">의료진 · 보험자 등 제한된 사람만 접근</span><span class="pick"><button type="button">EMR</button><button type="button">PHR</button></span></li>
+        <li data-answer="PHR"><span class="item">식이 · 운동 · 유전자 정보까지 포괄</span><span class="pick"><button type="button">EMR</button><button type="button">PHR</button></span></li>
+        <li data-answer="EMR"><span class="item">진료와 법적 기록 보존이 주된 목적</span><span class="pick"><button type="button">EMR</button><button type="button">PHR</button></span></li>
+      </ul>
+      <p class="score" aria-live="polite"></p>
+    </div>
+
+    <div class="cases">
+      <h3>실제 사례</h3>
+      <details>
+        <summary><span class="case-title">문 닫은 PHR, 살아남은 PHR</span><span class="case-hook">Google Health · HealthVault vs Apple 건강 기록</span></summary>
+        <div class="case-body">
+          <p>교재가 ‘상용화의 시초’로 소개한 Google Health(2008~2012)와 MS HealthVault(2007~2019)는 모두 문을 닫았습니다. 사용자가 직접 입력해야 했고, 병원 데이터와 연결이 어려웠습니다. 반면 2018년 나온 Apple 건강 기록은 HL7 FHIR 표준 API로 병원 EHR과 직접 연결되어 데이터가 알아서 들어옵니다.</p>
+          <p class="lesson">성패를 가른 것은 기능이 아니라 입력 피로와 표준 연계였습니다.</p>
+        </div>
+      </details>
+      <details>
+        <summary><span class="case-title">23andMe</span><span class="case-hook">회사가 파산하면 내 유전자 정보는?</span></summary>
+        <div class="case-body">
+          <p>2023년 해킹으로 약 690만 명의 정보가 유출된 뒤, 2025년 3월 파산보호를 신청하면서 약 1,500만 명의 유전 데이터가 매각 대상 자산이 됐습니다. 다수 주 정부가 반대했지만, 창업자가 세운 비영리법인 TTAM이 3억 500만 달러에 인수했습니다. 약관에 이미 합병 · 매각 시 데이터 이전 조항이 있었고, 삭제 요청은 약 190만 건이었습니다.</p>
+          <p class="lesson">약관의 한 줄이 1,500만 명의 유전 정보 행방을 결정했습니다. 민간형 PHR의 ‘개인정보 논란’은 추상적인 말이 아닙니다.</p>
+        </div>
+      </details>
+      <details>
+        <summary><span class="case-title">Flo 앱</span><span class="case-hook">‘비밀’이라던 생리주기 데이터</span></summary>
+        <div class="case-body">
+          <p>생리주기 앱 Flo는 민감한 건강정보를 공유하지 않는다고 안내했지만, 앱에 내장된 광고 · 분석용 SDK를 통해 사용자 입력 이벤트가 Meta · Google 등으로 전송됐습니다. 2021년 미국 FTC 제재와 집단소송이 이어졌고, 2025년 8월 배심원단은 Meta의 캘리포니아 프라이버시법 위반을 인정했습니다.</p>
+          <p class="lesson">해킹이 아니라 정상적으로 넣은 광고 도구가 유출 통로였습니다. 의료기관 밖의 건강데이터는 의료법보다 일반 개인정보 규율을 받는 경우가 많습니다.</p>
+        </div>
+      </details>
+    </div>
+
+    <aside class="discuss">
+      <h3>게시판 토론 과제 — 건강데이터를 사고팔 수 있다면</h3>
+      <div class="sides">
+        <div><h4>찬성 쪽 논리</h4><p>내 데이터의 가치를 내가 돌려받고, 연구와 AI 개발이 빨라지며, 데이터 주권이 완성된다.</p></div>
+        <div><h4>반대 쪽 논리</h4><p>유전 · 건강정보는 가족까지 드러내고, 경제적 약자일수록 더 많이 팔게 되며, 한 번 팔면 되돌릴 수 없다.</p></div>
+      </div>
+      <p>한쪽 입장을 골라, 이 페이지의 사례 하나 이상을 근거로 들어 의견을 남겨 주세요.</p>
+    </aside>
+  </div>
+</section>
+
+<section class="thread">
+  <div class="wrap">
+    <h2>CHAPTER 3를 관통한 하나의 실</h2>
+    <ol class="chain">
+      <li><strong>표준코드</strong>OCS의 KCD · EDI · ATC</li>
+      <li><strong>DICOM</strong>PACS 영상의 표준 형식</li>
+      <li><strong>HL7 · FHIR</strong>하위시스템과 기관 간 메시지</li>
+      <li><strong>마이헬스웨이</strong>국가 단위 데이터 연계</li>
+      <li><strong>의료AI</strong>학습 가능한 데이터가 비로소 확보된다</li>
+    </ol>
+    <p class="closing">표준화는 행정 절차가 아니라 의료AI의 전제조건입니다.</p>
+  </div>
+</section>
+
+</main>
+
+<footer class="sources">
+  <div class="wrap">
+    <h2>참고 자료</h2>
+    <ul>
+      <li>교재 3장 3~5절 (59~105쪽)</li>
+      <li>Drew T, Võ MLH, Wolfe JM. The invisible gorilla strikes again. Psychological Science, 2013</li>
+      <li>Greenbone Networks. Information Security Report: Unprotected Patient Data, 2019년 9월 · 11월</li>
+      <li>U.S. FDA. Artificial Intelligence-Enabled Medical Devices 목록 (2025년 12월 기준)</li>
+      <li>Poon EG 외. Effect of bar-code technology on the safety of medication administration. NEJM, 2010</li>
+      <li>van der Sijs H 외. Overriding of drug safety alerts in CPOE. JAMIA, 2006</li>
+      <li>Wong A 외. External validation of a widely implemented proprietary sepsis prediction model. JAMA Internal Medicine, 2021</li>
+      <li>보건복지부 · 한국보건의료정보원 건강정보 고속도로 보도자료 (2023.9, 2024.8)</li>
+      <li>HIPAA Journal, SEC 공시 등 23andMe · Change Healthcare · Flo 관련 보도 (2025)</li>
+    </ul>
+    <p class="note">수치는 각 출처의 발표 시점 기준이며, 이후 갱신될 수 있습니다.</p>
+  </div>
+</footer>
+
+<script>
+  // 단일 선택 퀴즈
+  document.querySelectorAll('[data-quiz="single"]').forEach(function (quiz) {
+    var buttons = quiz.querySelectorAll('.choices button');
+    var feedback = quiz.querySelector('.feedback');
+    buttons.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        buttons.forEach(function (b) {
+          b.disabled = true;
+          if (b.dataset.correct === 'true') b.classList.add('is-right');
+        });
+        if (btn.dataset.correct !== 'true') btn.classList.add('is-wrong');
+        feedback.hidden = false;
+      });
+    });
+  });
+
+  // 분류 퀴즈
+  document.querySelectorAll('[data-quiz="sort"]').forEach(function (quiz) {
+    var items = quiz.querySelectorAll('.sort-list li');
+    var score = quiz.querySelector('.score');
+    var done = 0, right = 0;
+    items.forEach(function (li) {
+      var buttons = li.querySelectorAll('.pick button');
+      buttons.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var ok = btn.textContent === li.dataset.answer;
+          buttons.forEach(function (b) {
+            b.disabled = true;
+            if (b.textContent === li.dataset.answer) b.classList.add('is-right');
+          });
+          if (!ok) btn.classList.add('is-wrong');
+          li.classList.add(ok ? 'got-right' : 'got-wrong');
+          done++; if (ok) right++;
+          score.textContent = done < items.length
+            ? done + '개 판정 · ' + right + '개 정답'
+            : items.length + '개 중 ' + right + '개 정답' + (right === items.length ? ' — 완벽합니다.' : ' — 틀린 문항의 초록색 답을 확인하세요.');
+        });
+      });
+    });
+  });
+</script>
+</body>
+</html>
